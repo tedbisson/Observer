@@ -71,10 +71,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\TrayIcon.ico" />
+    <None Include="Resources\ObserverIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ObserverIcon.png" />
+    <None Include="Resources\ExitImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ObserverImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SettingsImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ClockImage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

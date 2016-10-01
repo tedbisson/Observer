@@ -63,9 +63,39 @@ namespace Observer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ObserverIcon {
+        internal static System.Drawing.Bitmap ClockImage {
             get {
-                object obj = ResourceManager.GetObject("ObserverIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("ClockImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ExitImage {
+            get {
+                object obj = ResourceManager.GetObject("ExitImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ObserverImage {
+            get {
+                object obj = ResourceManager.GetObject("ObserverImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SettingsImage {
+            get {
+                object obj = ResourceManager.GetObject("SettingsImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -36,7 +36,7 @@ namespace Observer
 		{
 			// Setup the notify icon control.
 			m_notifyIcon.MouseClick += new MouseEventHandler(OnMouseClick);
-			m_notifyIcon.Icon        = Icon.FromHandle(Properties.Resources.ObserverIcon.GetHicon());
+			m_notifyIcon.Icon        = Icon.FromHandle(Properties.Resources.ObserverImage.GetHicon());
 			m_notifyIcon.Text        = "Daddy Observation Tool";
 			m_notifyIcon.Visible     = true;
 
@@ -52,10 +52,24 @@ namespace Observer
 		{
 			ContextMenuStrip menu = new ContextMenuStrip();
 
+			ToolStripMenuItem clockItem = new ToolStripMenuItem();
+			clockItem.Text   = "Clock";
+			clockItem.Click += new System.EventHandler(OnClock);
+			clockItem.Image  = Properties.Resources.ClockImage;
+			menu.Items.Add(clockItem);
+
+			ToolStripMenuItem settingsItem = new ToolStripMenuItem();
+			settingsItem.Text   = "Settings";
+			settingsItem.Click += new System.EventHandler(OnSettings);
+			settingsItem.Image  = Properties.Resources.SettingsImage;
+			menu.Items.Add(settingsItem);
+
+			menu.Items.Add(new ToolStripSeparator());
+
 			ToolStripMenuItem exitItem = new ToolStripMenuItem();
-			exitItem.Text = "Exit";
+			exitItem.Text   = "Exit";
 			exitItem.Click += new System.EventHandler(OnExit);
-			//exitItem.Image = Properties.Resources.ExitIcon;
+			exitItem.Image  = Properties.Resources.ExitImage;
 			menu.Items.Add(exitItem);
 
 			return menu;
@@ -71,6 +85,24 @@ namespace Observer
 
 		}
 
+		/// <summary>
+		/// Handles the Clock menu option.
+		/// </summary>
+		void OnClock(
+			object sender,
+			EventArgs e)
+		{
+		}
+
+		/// <summary>
+		/// Handles the Settings menu option.
+		/// </summary>
+		void OnSettings(
+			object sender,
+			EventArgs e)
+		{
+		}
+		
 		/// <summary>
 		/// Handles the Exit menu option.
 		/// </summary>
