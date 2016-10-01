@@ -11,6 +11,8 @@ namespace Observer
 	public class TrayIcon : IDisposable
 	{
 		private NotifyIcon m_notifyIcon;
+		private bool m_showingClock    = false;
+		private bool m_showingSettings = false;
 
 		/// <summary>
 		/// Constructor.
@@ -92,6 +94,13 @@ namespace Observer
 			object sender,
 			EventArgs e)
 		{
+			if (m_showingClock == false)
+			{
+				m_showingClock = true;
+				FormClock dlg = new FormClock();
+				dlg.ShowDialog();
+				m_showingClock = false;
+			}
 		}
 
 		/// <summary>
@@ -101,6 +110,13 @@ namespace Observer
 			object sender,
 			EventArgs e)
 		{
+			if (m_showingSettings == false)
+			{
+				m_showingSettings = true;
+				FormSettings dlg = new FormSettings();
+				dlg.ShowDialog();
+				m_showingSettings = false;
+			}
 		}
 		
 		/// <summary>
