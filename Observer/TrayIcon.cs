@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace Observer
 {
@@ -35,7 +36,7 @@ namespace Observer
 		{
 			// Setup the notify icon control.
 			m_notifyIcon.MouseClick += new MouseEventHandler(OnMouseClick);
-			m_notifyIcon.Icon        = Properties.Resources.TrayIcon;
+			m_notifyIcon.Icon        = Icon.FromHandle(Properties.Resources.ObserverIcon.GetHicon());
 			m_notifyIcon.Text        = "Daddy Observation Tool";
 			m_notifyIcon.Visible     = true;
 
