@@ -16,5 +16,17 @@ namespace Observer
 		{
 			InitializeComponent();
 		}
+
+		private void c_ok_Click(object sender, EventArgs e)
+		{
+			DialogResult = DialogResult.OK;
+			Close();
+		}
+
+		private void c_cancel_Click(object sender, EventArgs e)
+		{
+			DialogResult = DialogResult.Cancel;
+			Close();
+		}
 	}
 }

@@ -68,6 +68,9 @@
     <EmbeddedResource Include="FormClock.resx">
       <DependentUpon>FormClock.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormPassword.resx">
+      <DependentUpon>FormPassword.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

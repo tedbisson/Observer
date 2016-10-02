@@ -126,7 +126,11 @@ namespace Observer
 			object sender,
 			EventArgs e)
 		{
-			Application.Exit();
+			FormPassword password = new FormPassword();
+			if (password.ShowDialog() == DialogResult.OK)
+			{
+				Application.Exit();
+			}
 		}
 	}
 }
