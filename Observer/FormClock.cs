@@ -57,5 +57,16 @@ namespace Observer
 			int time = Settings.MinutesRemaining;
 			c_time.Text = String.Format("{0}:{1:0#}", (time / 60), (time % 60));
 		}
+
+		private void FormClock_FormClosing(
+			object sender,
+			FormClosingEventArgs e)
+		{
+			if (Settings.MinutesRemaining > 0)
+			{
+				e.Cancel = true;
+				Visible = false;
+			}
+		}
 	}
 }

@@ -68,6 +68,7 @@ namespace Observer
 				// That's all folks, shutdown.
 				m_timer.Enabled = false;
 				MessageBox.Show("This is when we would shut down.");
+				Application.Exit();
 			}
 		}
 	}

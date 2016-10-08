@@ -11,8 +11,8 @@ namespace Observer
 	public class TrayIcon : IDisposable
 	{
 		private NotifyIcon m_notifyIcon;
-		private bool m_showingClock    = false;
 		private bool m_showingSettings = false;
+		private FormClock m_clockDlg = new FormClock();
 
 		/// <summary>
 		/// Constructor.
@@ -29,6 +29,7 @@ namespace Observer
 		{
 			// Clean up the tray icon now!
 			m_notifyIcon.Dispose();
+			m_clockDlg.Close();
 		}
 
 		/// <summary>
@@ -44,6 +45,9 @@ namespace Observer
 
 			// Setup the context menu.
 			m_notifyIcon.ContextMenuStrip = SetupContextMenu();
+
+			// Show the clock immediately.
+			m_clockDlg.Show();
 		}
 
 		/// <summary>
@@ -94,13 +98,7 @@ namespace Observer
 			object sender,
 			EventArgs e)
 		{
-			if (m_showingClock == false)
-			{
-				m_showingClock = true;
-				FormClock dlg = new FormClock();
-				dlg.ShowDialog();
-				m_showingClock = false;
-			}
+			m_clockDlg.Show();
 		}
 
 		/// <summary>

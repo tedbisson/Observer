@@ -68,6 +68,7 @@
 			this.ShowIcon = false;
 			this.Text = "Time Remaining";
 			this.TopMost = true;
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormClock_FormClosing);
 			this.Load += new System.EventHandler(this.FormClock_Load);
 			this.ResumeLayout(false);
 
