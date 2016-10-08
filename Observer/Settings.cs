@@ -18,11 +18,15 @@ namespace Observer
 		// Timer used to update remaining time.
 		private static System.Windows.Forms.Timer m_timer;
 
+		// Flag indicating that the program is shutting down.
+		private static bool m_shutdown;
+
 		public static void Initialize()
 		{
 			// Go get values from registry and/or log file.
 			m_minutesRemaining = 20;
 			m_adminPassword    = "hello";
+			m_shutdown         = false;
 
 			// Setup the timer to update the time remaining.
 			m_timer = new Timer();
@@ -53,6 +57,16 @@ namespace Observer
 			}
 		}
 
+		public static bool ShuttingDown
+		{
+			get { return m_shutdown; }
+			set
+			{
+				m_shutdown = value;
+				m_timer.Enabled = false;
+			}
+		}
+
 		private static void OnTimer(
 			object sender,
 			EventArgs e)
@@ -66,7 +80,7 @@ namespace Observer
 			else if (m_minutesRemaining <= 0)
 			{
 				// That's all folks, shutdown.
-				m_timer.Enabled = false;
+				Settings.ShuttingDown = true;
 				MessageBox.Show("This is when we would shut down.");
 				Application.Exit();
 			}

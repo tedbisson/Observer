@@ -127,6 +127,7 @@ namespace Observer
 			FormPassword password = new FormPassword();
 			if (password.ShowDialog() == DialogResult.OK)
 			{
+				Settings.ShuttingDown = true;
 				Application.Exit();
 			}
 		}

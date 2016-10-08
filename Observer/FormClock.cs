@@ -62,7 +62,7 @@ namespace Observer
 			object sender,
 			FormClosingEventArgs e)
 		{
-			if (Settings.MinutesRemaining > 0)
+			if (Settings.ShuttingDown == false)
 			{
 				e.Cancel = true;
 				Visible = false;
