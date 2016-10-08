@@ -16,6 +16,9 @@ namespace Observer
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
+
+			Settings.Initialize();
+
 			using (TrayIcon trayIcon = new TrayIcon())
 			{
 				// Show the system tray icon.

@@ -14,8 +14,6 @@ namespace Observer
 	{
 		private System.Windows.Forms.Timer m_timer;
 
-		public int Time = 100;
-
 		public FormClock()
 		{
 			InitializeComponent();
@@ -29,7 +27,6 @@ namespace Observer
 			if (dlg.ShowDialog() == DialogResult.OK)
 			{
 				MessageBox.Show("Ok, you get more time!");
-				Time = 100;
 			}
 		}
 
@@ -57,8 +54,8 @@ namespace Observer
 			EventArgs e)
 		{
 			// Format the minutes remaining as hours and minutes.
-			c_time.Text = String.Format("{0}:{1:0#}", (Time / 60), (Time % 60));
-			--Time;
+			int time = Settings.MinutesRemaining;
+			c_time.Text = String.Format("{0}:{1:0#}", (time / 60), (time % 60));
 		}
 	}
 }
