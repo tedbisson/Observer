@@ -19,14 +19,33 @@ namespace Observer
 
 		private void c_ok_Click(object sender, EventArgs e)
 		{
-			DialogResult = DialogResult.OK;
-			Close();
+			if (c_password.Text == Settings.AdminPassword)
+			{
+				DialogResult = DialogResult.OK;
+				Close();
+			}
+			else
+			{
+				MessageBox.Show("The password is not correct!", "Incorrect Password!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+				DialogResult = DialogResult.Cancel;
+				Close();
+			}
 		}
 
 		private void c_cancel_Click(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.Cancel;
 			Close();
+		}
+
+		private void c_password_KeyUp(
+			object sender,
+			KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				c_ok_Click(sender, e);
+			}
 		}
 	}
 }

@@ -25,7 +25,7 @@ namespace Observer
 		{
 			// Go get values from registry and/or log file.
 			m_minutesRemaining = 30;
-			m_adminPassword    = "hello";
+			m_adminPassword    = "";
 			m_shutdown         = false;
 
 			// Setup the timer to update the time remaining.
