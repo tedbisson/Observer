@@ -24,7 +24,7 @@ namespace Observer
 		public static void Initialize()
 		{
 			// Go get values from registry and/or log file.
-			m_minutesRemaining = 20;
+			m_minutesRemaining = 30;
 			m_adminPassword    = "hello";
 			m_shutdown         = false;
 
