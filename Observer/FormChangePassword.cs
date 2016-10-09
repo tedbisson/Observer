@@ -1,23 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Observer
 {
 	public partial class FormChangePassword : Form
 	{
+		/// <summary>
+		/// Constructor.
+		/// </summary>
 		public FormChangePassword()
 		{
 			InitializeComponent();
 		}
 
-		private void c_ok_Click(object sender, EventArgs e)
+		/// <summary>
+		/// User is ready to change their password.  If the old password doesn't match, or the
+		/// new and confirm password doesn't match, change the color state and alert the user.
+		/// </summary>
+		private void c_ok_Click(
+			object sender,
+			EventArgs e)
 		{
 			// Reset label colors as necessary.
 			c_currentLabel.ForeColor = SystemColors.ControlText;
@@ -50,7 +53,12 @@ namespace Observer
 			Close();
 		}
 
-		private void c_cancel_Click(object sender, EventArgs e)
+		/// <summary>
+		/// User cancelled the password change request.
+		/// </summary>
+		private void c_cancel_Click(
+			object sender,
+			EventArgs e)
 		{
 			Close();
 		}

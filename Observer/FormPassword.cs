@@ -1,23 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Observer
 {
 	public partial class FormPassword : Form
 	{
+		/// <summary>
+		/// Constructor.
+		/// </summary>
 		public FormPassword()
 		{
 			InitializeComponent();
 		}
 
-		private void c_ok_Click(object sender, EventArgs e)
+		/// <summary>
+		/// User is ready to proceed with password verification.
+		/// </summary>
+		private void c_ok_Click(
+			object sender,
+			EventArgs e)
 		{
 			if (c_password.Text.ComputeHash() == Settings.AdminPasswordHash)
 			{
@@ -32,12 +33,20 @@ namespace Observer
 			}
 		}
 
-		private void c_cancel_Click(object sender, EventArgs e)
+		/// <summary>
+		/// User decided not to change the password.
+		/// </summary>
+		private void c_cancel_Click(
+			object sender,
+			EventArgs e)
 		{
 			DialogResult = DialogResult.Cancel;
 			Close();
 		}
 
+		/// <summary>
+		/// Catches the enter key when the user is typing the password.
+		/// </summary>
 		private void c_password_KeyUp(
 			object sender,
 			KeyEventArgs e)

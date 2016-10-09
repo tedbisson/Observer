@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Observer
@@ -17,8 +14,10 @@ namespace Observer
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
+			// Initialize the program settings.
 			Settings.Initialize();
 
+			// Start the main icon interface in the system tray.
 			using (TrayIcon trayIcon = new TrayIcon())
 			{
 				// Show the system tray icon.

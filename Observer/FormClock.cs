@@ -1,24 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Observer
 {
 	public partial class FormClock : Form
 	{
+		// Timer used to update the time remaining display.
 		private System.Windows.Forms.Timer m_timer;
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
 		public FormClock()
 		{
 			InitializeComponent();
 		}
 
+		/// <summary>
+		/// User requests additional time.
+		/// </summary>
 		private void c_request_Click(
 			object sender,
 			EventArgs e)
@@ -30,6 +31,9 @@ namespace Observer
 			}
 		}
 
+		/// <summary>
+		/// On load, initializes the dialog and positions it in the bottom corner of the screen.
+		/// </summary>
 		private void FormClock_Load(
 			object sender,
 			EventArgs e)
@@ -49,6 +53,9 @@ namespace Observer
 			m_timer.Start();
 		}
 
+		/// <summary>
+		/// Timer tick, updates the time remaining display.
+		/// </summary>
 		private void OnTimer(
 			object sender,
 			EventArgs e)
@@ -58,6 +65,9 @@ namespace Observer
 			c_time.Text = String.Format("{0}:{1:0#}", (time / 60), (time % 60));
 		}
 
+		/// <summary>
+		/// We don't actually close the dialog, just hide it.
+		/// </summary>
 		private void FormClock_FormClosing(
 			object sender,
 			FormClosingEventArgs e)

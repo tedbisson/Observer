@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Observer
 {
+	/// <summary>
+	/// Extensions to the string class.
+	/// </summary>
 	public static class StringExtensions
 	{
 		/// <summary>

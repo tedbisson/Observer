@@ -1,25 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 
 namespace Observer
 {
+	/// <summary>
+	/// Manages the tray icon, which is the primary interface for this program.
+	/// </summary>
 	public class TrayIcon : IDisposable
 	{
-		private NotifyIcon m_notifyIcon;
-		private FormClock m_clockDlg = new FormClock();
-		private FormSettings m_settingsDlg = new FormSettings();
+		private NotifyIcon   m_notifyIcon;
+		private FormClock    m_clockDlg;
+		private FormSettings m_settingsDlg;
 
 		/// <summary>
 		/// Constructor.
 		/// </summary>
 		public TrayIcon()
 		{
-			m_notifyIcon = new NotifyIcon();
+			m_notifyIcon  = new NotifyIcon();
+			m_clockDlg    = new FormClock();
+			m_settingsDlg = new FormSettings();
 		}
 
 		/// <summary>
@@ -39,10 +40,9 @@ namespace Observer
 		public void Display()
 		{
 			// Setup the notify icon control.
-			m_notifyIcon.MouseClick += new MouseEventHandler(OnMouseClick);
-			m_notifyIcon.Icon        = Icon.FromHandle(Properties.Resources.ObserverImage.GetHicon());
-			m_notifyIcon.Text        = "Daddy Observation Tool";
-			m_notifyIcon.Visible     = true;
+			m_notifyIcon.Icon    = Icon.FromHandle(Properties.Resources.ObserverImage.GetHicon());
+			m_notifyIcon.Text    = "Daddy Observation Tool";
+			m_notifyIcon.Visible = true;
 
 			// Setup the context menu.
 			m_notifyIcon.ContextMenuStrip = SetupContextMenu();
@@ -54,7 +54,6 @@ namespace Observer
 		/// <summary>
 		/// Creates the context menu for the tray icon.
 		/// </summary>
-		/// <returns></returns>
 		private ContextMenuStrip SetupContextMenu()
 		{
 			ContextMenuStrip menu = new ContextMenuStrip();
@@ -80,16 +79,6 @@ namespace Observer
 			menu.Items.Add(exitItem);
 
 			return menu;
-		}
-
-		/// <summary>
-		/// Handles the MouseClick event from the NotifyIcon control.
-		/// </summary>
-		void OnMouseClick(
-			object sender,
-			MouseEventArgs e)
-		{
-
 		}
 
 		/// <summary>
