@@ -20,7 +20,6 @@ TO DO LIST -------------------------------------------------------------------
 
 - Change timer from seconds to actual minutes.
 - Change update rate for the countdown clock.
-- Shut down the computer when the time elapses.
 - Save usage information to a log file.
 - Save time information to the system registry.
 - Save and load settings from the system registry.
