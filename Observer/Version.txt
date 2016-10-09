@@ -1,0 +1,35 @@
+﻿------------------------------------------------------------------------------
+                                  Observer
+
+                      Copyright (c) 2016 Cirius Software
+                    By Theodore Bisson, All Rights Reserved
+
+This program was created to monitor the time spent on a computer.  To some
+extent it will also police usage.  When the allowed time each day comes to
+an end, the user is warned that the computer will soon shut down, and then
+when the time is exhausted, it is shut down.
+
+For now this program is fairly easy to bypass, but it is intended to police
+children, and as such it is not expected that they would yet know how to use
+the task manager to terminate a program.  A future update will address this
+issue.
+------------------------------------------------------------------------------
+Last updated 8 October, 2016
+
+TO DO LIST -------------------------------------------------------------------
+
+- Change timer from seconds to actual minutes.
+- Change update rate for the countdown clock.
+- Shut down the computer when the time elapses.
+- Save usage information to a log file.
+- Save time information to the system registry.
+- Save and load settings from the system registry.
+
+- Observer web browsers, log URLs visited.
+- Add email support to mail logs to a third party (parents.)
+- Add a system service to keep the program alive even when force quit.
+- Terminate web browser when certain domains are accessed.
+
+KNOWN BUGS -------------------------------------------------------------------
+
+------------------------------------------------------------------------------
