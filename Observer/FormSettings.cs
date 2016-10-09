@@ -16,5 +16,25 @@ namespace Observer
 		{
 			InitializeComponent();
 		}
+
+		private void c_changePassword_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void c_save_Click(object sender, EventArgs e)
+		{
+			// Update the daily limit.
+			int dailyLimit = 0;
+			if (int.TryParse(c_timeLimit.Text, out dailyLimit) == true)
+			{
+				Settings.DailyLimit = dailyLimit;
+			}
+		}
+
+		private void FormSettings_Load(object sender, EventArgs e)
+		{
+			c_timeLimit.Text = Settings.DailyLimit.ToString();
+		}
 	}
 }
