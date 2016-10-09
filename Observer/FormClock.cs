@@ -24,11 +24,7 @@ namespace Observer
 			object sender,
 			EventArgs e)
 		{
-			FormPassword dlg = new FormPassword();
-			if (dlg.ShowDialog() == DialogResult.OK)
-			{
-				MessageBox.Show("Ok, you get more time!");
-			}
+			TrayIcon.Instance.ShowSettingsDlg();
 		}
 
 		/// <summary>

@@ -14,10 +14,25 @@ namespace Observer
 		private FormSettings m_settingsDlg;
 
 		/// <summary>
+		/// Accessor for components to get back to this main program controller,
+		/// which is not a form.  Otherwise we could use standard Owner/Parent
+		/// properties.
+		/// </summary>
+		private static TrayIcon m_trayIcon = null;
+		public static TrayIcon Instance
+		{
+			get { return m_trayIcon; }
+		}
+
+		/// <summary>
 		/// Constructor.
 		/// </summary>
 		public TrayIcon()
 		{
+			// The one and only TrayIcon program.
+			m_trayIcon = this;
+
+			// Setup components.
 			m_notifyIcon  = new NotifyIcon();
 			m_clockDlg    = new FormClock();
 			m_settingsDlg = new FormSettings();
@@ -84,7 +99,7 @@ namespace Observer
 		/// <summary>
 		/// Handles the Clock menu option.
 		/// </summary>
-		void OnClock(
+		private void OnClock(
 			object sender,
 			EventArgs e)
 		{
@@ -94,9 +109,17 @@ namespace Observer
 		/// <summary>
 		/// Handles the Settings menu option.
 		/// </summary>
-		void OnSettings(
+		private void OnSettings(
 			object sender,
 			EventArgs e)
+		{
+			ShowSettingsDlg();
+		}
+
+		/// <summary>
+		/// Verifies the admin password, then displays the settings dialog.
+		/// </summary>
+		public void ShowSettingsDlg()
 		{
 			// If it's visible, we're done.
 			if (m_settingsDlg.Visible == true)
@@ -114,7 +137,7 @@ namespace Observer
 		/// <summary>
 		/// Handles the Exit menu option.
 		/// </summary>
-		void OnExit(
+		private void OnExit(
 			object sender,
 			EventArgs e)
 		{
