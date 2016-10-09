@@ -13,7 +13,7 @@ namespace Observer
 		private static int m_minutesRemaining;
 
 		// Admin password used to change time allocation.
-		private static string m_adminPassword;
+		private static UInt64 m_adminPasswordHash;
 
 		// Timer used to update remaining time.
 		private static System.Windows.Forms.Timer m_timer;
@@ -24,9 +24,9 @@ namespace Observer
 		public static void Initialize()
 		{
 			// Go get values from registry and/or log file.
-			m_minutesRemaining = 30;
-			m_adminPassword    = "";
-			m_shutdown         = false;
+			m_minutesRemaining  = 30;
+			SetAdminPassword("");
+			m_shutdown          = false;
 
 			// Setup the timer to update the time remaining.
 			m_timer = new Timer();
@@ -46,15 +46,16 @@ namespace Observer
 			}
 		}
 
-		public static string AdminPassword
+		public static UInt64 AdminPasswordHash
 		{
-			get { return m_adminPassword; }
-			set
-			{
-				m_adminPassword = value;
+			get { return m_adminPasswordHash; }
+		}
 
-				// Need to update the registry.
-			}
+		public static void SetAdminPassword(string password)
+		{
+			m_adminPasswordHash = password.ComputeHash();
+
+			// Need to update the settings file.
 		}
 
 		public static bool ShuttingDown

@@ -19,7 +19,7 @@ namespace Observer
 
 		private void c_ok_Click(object sender, EventArgs e)
 		{
-			if (c_password.Text == Settings.AdminPassword)
+			if (c_password.Text.ComputeHash() == Settings.AdminPasswordHash)
 			{
 				DialogResult = DialogResult.OK;
 				Close();
