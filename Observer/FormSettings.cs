@@ -19,7 +19,8 @@ namespace Observer
 
 		private void c_changePassword_Click(object sender, EventArgs e)
 		{
-
+			FormChangePassword dlg = new FormChangePassword();
+			dlg.ShowDialog();
 		}
 
 		private void c_save_Click(object sender, EventArgs e)

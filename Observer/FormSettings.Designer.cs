@@ -48,14 +48,14 @@
 			this.c_timeLimit.Location = new System.Drawing.Point(146, 12);
 			this.c_timeLimit.Name = "c_timeLimit";
 			this.c_timeLimit.Size = new System.Drawing.Size(122, 20);
-			this.c_timeLimit.TabIndex = 5;
+			this.c_timeLimit.TabIndex = 0;
 			// 
 			// c_save
 			// 
 			this.c_save.Location = new System.Drawing.Point(193, 76);
 			this.c_save.Name = "c_save";
 			this.c_save.Size = new System.Drawing.Size(75, 23);
-			this.c_save.TabIndex = 6;
+			this.c_save.TabIndex = 2;
 			this.c_save.Text = "Save";
 			this.c_save.UseVisualStyleBackColor = true;
 			this.c_save.Click += new System.EventHandler(this.c_save_Click);
@@ -65,7 +65,7 @@
 			this.c_changePassword.Location = new System.Drawing.Point(15, 76);
 			this.c_changePassword.Name = "c_changePassword";
 			this.c_changePassword.Size = new System.Drawing.Size(147, 23);
-			this.c_changePassword.TabIndex = 7;
+			this.c_changePassword.TabIndex = 1;
 			this.c_changePassword.Text = "Change Admin Password";
 			this.c_changePassword.UseVisualStyleBackColor = true;
 			this.c_changePassword.Click += new System.EventHandler(this.c_changePassword_Click);
