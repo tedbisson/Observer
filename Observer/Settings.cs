@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace Observer
@@ -140,9 +141,18 @@ namespace Observer
 			{
 				// That's all folks, shutdown.
 				Settings.ShuttingDown = true;
-				MessageBox.Show("This is when we would shut down.");
-				Application.Exit();
+				ShutdownComputer();
+				//MessageBox.Show("This is when we would shut down.");
+				//Application.Exit();
 			}
+		}
+
+		/// <summary>
+		/// Triggers a shutdown immediately.
+		/// </summary>
+		public static void ShutdownComputer()
+		{
+			Process.Start("shutdown.exe", "/s /f /t 00");
 		}
 	}
 }
