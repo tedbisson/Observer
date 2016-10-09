@@ -11,8 +11,8 @@ namespace Observer
 	public class TrayIcon : IDisposable
 	{
 		private NotifyIcon m_notifyIcon;
-		private bool m_showingSettings = false;
 		private FormClock m_clockDlg = new FormClock();
+		private FormSettings m_settingsDlg = new FormSettings();
 
 		/// <summary>
 		/// Constructor.
@@ -30,6 +30,7 @@ namespace Observer
 			// Clean up the tray icon now!
 			m_notifyIcon.Dispose();
 			m_clockDlg.Close();
+			m_settingsDlg.Close();
 		}
 
 		/// <summary>
@@ -108,13 +109,17 @@ namespace Observer
 			object sender,
 			EventArgs e)
 		{
-			if (m_showingSettings == false)
-			{
-				m_showingSettings = true;
-				FormSettings dlg = new FormSettings();
-				dlg.ShowDialog();
-				m_showingSettings = false;
-			}
+			// If it's visible, we're done.
+			if (m_settingsDlg.Visible == true)
+				return;
+
+			// Admin password required.
+			FormPassword password = new FormPassword();
+			if (password.ShowDialog() != DialogResult.OK)
+				return;
+
+			// Show the settings dialog.
+			m_settingsDlg.Show();
 		}
 		
 		/// <summary>
