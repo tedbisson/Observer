@@ -18,8 +18,6 @@ Last updated 8 October, 2016
 
 TO DO LIST -------------------------------------------------------------------
 
-- Change timer from seconds to actual minutes.
-- Change update rate for the countdown clock.
 - Save usage information to a log file.
 - Save time information to the system registry.
 - Save and load settings from the system registry.

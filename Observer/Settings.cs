@@ -40,7 +40,7 @@ namespace Observer
 			// Setup the timer to update the time remaining.
 			m_timer = new Timer();
 			m_timer.Tick += new EventHandler(OnTimer);
-			m_timer.Interval = 1000;//60 * 1000;
+			m_timer.Interval = 60 * 1000;
 			m_timer.Start();
 		}
 
