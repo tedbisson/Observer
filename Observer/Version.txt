@@ -18,9 +18,9 @@ Last updated 8 October, 2016
 
 TO DO LIST -------------------------------------------------------------------
 
-- Save usage information to a log file.
-- Save time information to the system registry.
 - Save and load settings from the system registry.
+- Save time information to the system registry.
+- Save usage information to a log file.
 
 - Observer web browsers, log URLs visited.
 - Add email support to mail logs to a third party (parents.)

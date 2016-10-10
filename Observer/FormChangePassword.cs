@@ -37,7 +37,7 @@ namespace Observer
 			}
 
 			// Verify the current password before changing it.
-			UInt64 oldPassword = c_oldPassword.Text.ComputeHash();
+			UInt32 oldPassword = c_oldPassword.Text.ComputeHash();
 			if (oldPassword != Settings.AdminPasswordHash)
 			{
 				c_currentLabel.ForeColor = Color.Red;

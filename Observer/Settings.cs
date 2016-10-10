@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 
@@ -17,7 +18,7 @@ namespace Observer
 		private static int m_warningTime;
 
 		// Admin password used to change time allocation.
-		private static UInt64 m_adminPasswordHash;
+		private static UInt32 m_adminPasswordHash;
 
 		// Timer used to update remaining time.
 		private static System.Windows.Forms.Timer m_timer;
@@ -30,18 +31,48 @@ namespace Observer
 		/// </summary>
 		public static void Initialize()
 		{
-			// Go get values from registry and/or log file.
-			m_dailyLimit        = 30;
-			m_minutesRemaining  = m_dailyLimit;
-			m_warningTime       = 10;
-			m_shutdown          = false;
+			// Set default values.
+			m_dailyLimit = 30;
+			m_minutesRemaining = m_dailyLimit;
+			m_warningTime = 10;
+			m_shutdown = false;
 			SetAdminPassword("");
+
+			// Load settings from the registry.
+			if (LoadRegistryValues() == false)
+			{
+				// A warning would be good here.
+			}
 
 			// Setup the timer to update the time remaining.
 			m_timer = new Timer();
 			m_timer.Tick += new EventHandler(OnTimer);
 			m_timer.Interval = 60 * 1000;
 			m_timer.Start();
+		}
+
+		/// <summary>
+		/// Returns the root registry key for the program.
+		/// </summary>
+		private static RegistryKey RootRegistryKey
+		{
+			get
+			{
+				return Registry.CurrentUser.OpenOrCreateKey("SOFTWARE\\Cirius\\Observer");
+			}
+		}
+
+		/// <summary>
+		/// Loads or initializes the program values using the Windows registry.
+		/// </summary>
+		private static bool LoadRegistryValues()
+		{
+			// Load the daily limit.
+			m_dailyLimit = RootRegistryKey.GetIntValue("DailyLimit", 30);
+			//object value = observerKey.GetValue("DailyLimit", 30);
+			
+
+			return true;
 		}
 
 		/// <summary>
@@ -82,7 +113,7 @@ namespace Observer
 
 					m_dailyLimit = value;
 
-					// Need to update the log file.
+					RootRegistryKey.SetValue("DailyLimit", m_dailyLimit);
 				}
 			}
 		}
@@ -91,7 +122,7 @@ namespace Observer
 		/// AdminPasswordHash property, returns the password hash value used to restrict
 		/// access to parts of the program, or turn it off.
 		/// </summary>
-		public static UInt64 AdminPasswordHash
+		public static UInt32 AdminPasswordHash
 		{
 			get { return m_adminPasswordHash; }
 		}
