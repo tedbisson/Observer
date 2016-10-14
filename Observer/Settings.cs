@@ -44,7 +44,7 @@ namespace Observer
 				// A warning would be good here.
 			}
 
-			// Setup the timer to update the time remaining.
+            // Setup the timer to update the time remaining.
 			m_timer = new Timer();
 			m_timer.Tick += new EventHandler(OnTimer);
 			m_timer.Interval = 60 * 1000;
@@ -70,7 +70,9 @@ namespace Observer
 			// Load the daily limit.
 			m_dailyLimit = RootRegistryKey.GetIntValue("DailyLimit", 30);
 			//object value = observerKey.GetValue("DailyLimit", 30);
-			
+
+
+            m_minutesRemaining = m_dailyLimit;
 
 			return true;
 		}
