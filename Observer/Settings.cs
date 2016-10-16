@@ -18,7 +18,7 @@ namespace Observer
 		private static int m_warningTime;
 
 		// Admin password used to change time allocation.
-		private static UInt32 m_adminPasswordHash;
+		private static UInt32 m_adminPasswordHash = (UInt32) "".ComputeHash();
 
 		// Timer used to update remaining time.
 		private static System.Windows.Forms.Timer m_timer;
@@ -36,13 +36,19 @@ namespace Observer
 			m_minutesRemaining = m_dailyLimit;
 			m_warningTime = 10;
 			m_shutdown = false;
-			SetAdminPassword("");
 
 			// Load settings from the registry.
-			if (LoadRegistryValues() == false)
+			LoadRegistryValues();
+
+			// If we've run out of time already, notify the user.
+			if (m_minutesRemaining < 2)
 			{
-				// A warning would be good here.
+				MessageBox.Show("You have used up your time for today, the computer will shut down in 2 minutes!", "Time's Up", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+				m_minutesRemaining = 2;
 			}
+
+			// Catch when the application exits to update the registry.
+			Application.ApplicationExit += new EventHandler(OnAppExit);
 
             // Setup the timer to update the time remaining.
 			m_timer = new Timer();
@@ -65,16 +71,49 @@ namespace Observer
 		/// <summary>
 		/// Loads or initializes the program values using the Windows registry.
 		/// </summary>
-		private static bool LoadRegistryValues()
+		private static void LoadRegistryValues()
 		{
 			// Load the daily limit.
 			m_dailyLimit = RootRegistryKey.GetIntValue("DailyLimit", 30);
-			//object value = observerKey.GetValue("DailyLimit", 30);
 
+			// Are we continuing from earlier today?
+			if (RootRegistryKey.GetIntValue("LastDay", DateToday()) == DateToday())
+			{
+				m_minutesRemaining = RootRegistryKey.GetIntValue("TimeLeftToday", m_dailyLimit);
+			}
+			// New day, new limit.
+			else
+			{
+				m_minutesRemaining = m_dailyLimit;
+			}
 
-            m_minutesRemaining = m_dailyLimit;
+			// Update the registry from here.
+			RootRegistryKey.SetValue("LastDay", DateToday());
+			RootRegistryKey.SetValue("TimeLeftToday", m_minutesRemaining);
 
-			return true;
+			// Load the admin password hash.
+			int defaultHash = (int) ("".ComputeHash());
+			m_adminPasswordHash = (UInt32) RootRegistryKey.GetIntValue("AdminPassword", defaultHash);
+		}
+
+		/// <summary>
+		/// Helper to format the date used to determine the daily limit.
+		/// </summary>
+		private static int DateToday()
+		{
+			return ((DateTime.Now.Year << 16) + (DateTime.Now.Month << 8) + (DateTime.Now.Day));
+		}
+
+		/// <summary>
+		/// When the application exits we want to record how much time is remaining
+		/// so the next time it is started it can resume for the day.
+		/// </summary>
+		private static void OnAppExit(
+			object sender,
+			EventArgs e)
+		{
+			// Store the time remaining for today.
+			RootRegistryKey.SetIntValue("TimeLeftToday", m_minutesRemaining);
 		}
 
 		/// <summary>
@@ -136,7 +175,8 @@ namespace Observer
 		{
 			m_adminPasswordHash = password.ComputeHash();
 
-			// Need to update the settings file.
+			// Save the updated password hash value.
+			RootRegistryKey.SetIntValue("AdminPassword", (int) m_adminPasswordHash);
 		}
 
 		/// <summary>

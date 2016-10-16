@@ -55,5 +55,13 @@ namespace Observer
 
 			return (int)theValue;
 		}
+
+		public static void SetIntValue(
+			this RegistryKey key,
+			string name,
+			int value)
+		{
+			key.SetValue(name, value);
+		}
 	}
 }
