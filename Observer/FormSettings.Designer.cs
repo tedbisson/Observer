@@ -32,6 +32,8 @@
 			this.c_timeLimit = new System.Windows.Forms.TextBox();
 			this.c_save = new System.Windows.Forms.Button();
 			this.c_changePassword = new System.Windows.Forms.Button();
+			this.label1 = new System.Windows.Forms.Label();
+			this.c_timeRemaining = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// label3
@@ -55,7 +57,7 @@
 			this.c_save.Location = new System.Drawing.Point(193, 76);
 			this.c_save.Name = "c_save";
 			this.c_save.Size = new System.Drawing.Size(75, 23);
-			this.c_save.TabIndex = 2;
+			this.c_save.TabIndex = 3;
 			this.c_save.Text = "Save";
 			this.c_save.UseVisualStyleBackColor = true;
 			this.c_save.Click += new System.EventHandler(this.c_save_Click);
@@ -65,10 +67,26 @@
 			this.c_changePassword.Location = new System.Drawing.Point(15, 76);
 			this.c_changePassword.Name = "c_changePassword";
 			this.c_changePassword.Size = new System.Drawing.Size(147, 23);
-			this.c_changePassword.TabIndex = 1;
+			this.c_changePassword.TabIndex = 2;
 			this.c_changePassword.Text = "Change Admin Password";
 			this.c_changePassword.UseVisualStyleBackColor = true;
 			this.c_changePassword.Click += new System.EventHandler(this.c_changePassword_Click);
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(12, 41);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(119, 13);
+			this.label1.TabIndex = 4;
+			this.label1.Text = "Time Remaining Today:";
+			// 
+			// c_timeRemaining
+			// 
+			this.c_timeRemaining.Location = new System.Drawing.Point(146, 38);
+			this.c_timeRemaining.Name = "c_timeRemaining";
+			this.c_timeRemaining.Size = new System.Drawing.Size(122, 20);
+			this.c_timeRemaining.TabIndex = 1;
 			// 
 			// FormSettings
 			// 
@@ -77,12 +95,18 @@
 			this.ClientSize = new System.Drawing.Size(288, 120);
 			this.Controls.Add(this.c_changePassword);
 			this.Controls.Add(this.c_save);
+			this.Controls.Add(this.c_timeRemaining);
+			this.Controls.Add(this.label1);
 			this.Controls.Add(this.c_timeLimit);
 			this.Controls.Add(this.label3);
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
 			this.Name = "FormSettings";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Observer Settings";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSettings_FormClosing);
 			this.Load += new System.EventHandler(this.FormSettings_Load);
+			this.Shown += new System.EventHandler(this.FormSettings_Shown);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -94,5 +118,7 @@
 		private System.Windows.Forms.TextBox c_timeLimit;
 		private System.Windows.Forms.Button c_save;
 		private System.Windows.Forms.Button c_changePassword;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.TextBox c_timeRemaining;
 	}
 }

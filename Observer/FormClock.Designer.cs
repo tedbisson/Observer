@@ -63,6 +63,7 @@
 			this.Controls.Add(this.c_request);
 			this.Controls.Add(this.c_time);
 			this.MaximizeBox = false;
+			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(260, 160);
 			this.Name = "FormClock";
 			this.ShowIcon = false;

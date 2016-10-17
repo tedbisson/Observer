@@ -37,6 +37,16 @@ namespace Observer
 			{
 				Settings.DailyLimit = dailyLimit;
 			}
+
+			// Update the time remaining today.
+			int timeRemaining = 0;
+			if (int.TryParse(c_timeRemaining.Text, out timeRemaining) == true)
+			{
+				Settings.MinutesRemaining = timeRemaining;
+			}
+
+			// Hide the settings.
+			Hide();
 		}
 
 		/// <summary>
@@ -47,6 +57,20 @@ namespace Observer
 			EventArgs e)
 		{
 			c_timeLimit.Text = Settings.DailyLimit.ToString();
+		}
+
+		/// <summary>
+		/// When the form is shown it updates the time remaining text box.
+		/// </summary>
+		private void FormSettings_Shown(object sender, EventArgs e)
+		{
+			c_timeRemaining.Text = Settings.MinutesRemaining.ToString();
+		}
+
+		private void FormSettings_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			Hide();
+			e.Cancel = true;
 		}
 	}
 }
