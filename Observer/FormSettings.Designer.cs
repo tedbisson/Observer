@@ -34,6 +34,7 @@
 			this.c_changePassword = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
 			this.c_timeRemaining = new System.Windows.Forms.TextBox();
+			this.c_showLogFile = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// label3
@@ -54,10 +55,10 @@
 			// 
 			// c_save
 			// 
-			this.c_save.Location = new System.Drawing.Point(193, 76);
+			this.c_save.Location = new System.Drawing.Point(193, 106);
 			this.c_save.Name = "c_save";
 			this.c_save.Size = new System.Drawing.Size(75, 23);
-			this.c_save.TabIndex = 3;
+			this.c_save.TabIndex = 4;
 			this.c_save.Text = "Save";
 			this.c_save.UseVisualStyleBackColor = true;
 			this.c_save.Click += new System.EventHandler(this.c_save_Click);
@@ -88,11 +89,22 @@
 			this.c_timeRemaining.Size = new System.Drawing.Size(122, 20);
 			this.c_timeRemaining.TabIndex = 1;
 			// 
+			// c_showLogFile
+			// 
+			this.c_showLogFile.Location = new System.Drawing.Point(15, 106);
+			this.c_showLogFile.Name = "c_showLogFile";
+			this.c_showLogFile.Size = new System.Drawing.Size(147, 23);
+			this.c_showLogFile.TabIndex = 3;
+			this.c_showLogFile.Text = "Show Log File";
+			this.c_showLogFile.UseVisualStyleBackColor = true;
+			this.c_showLogFile.Click += new System.EventHandler(this.c_showLogFile_Click);
+			// 
 			// FormSettings
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(288, 120);
+			this.ClientSize = new System.Drawing.Size(288, 146);
+			this.Controls.Add(this.c_showLogFile);
 			this.Controls.Add(this.c_changePassword);
 			this.Controls.Add(this.c_save);
 			this.Controls.Add(this.c_timeRemaining);
@@ -120,5 +132,6 @@
 		private System.Windows.Forms.Button c_changePassword;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.TextBox c_timeRemaining;
+		private System.Windows.Forms.Button c_showLogFile;
 	}
 }

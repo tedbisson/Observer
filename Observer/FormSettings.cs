@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace Observer
@@ -62,15 +63,32 @@ namespace Observer
 		/// <summary>
 		/// When the form is shown it updates the time remaining text box.
 		/// </summary>
-		private void FormSettings_Shown(object sender, EventArgs e)
+		private void FormSettings_Shown(
+			object sender,
+			EventArgs e)
 		{
 			c_timeRemaining.Text = Settings.MinutesRemaining.ToString();
 		}
 
-		private void FormSettings_FormClosing(object sender, FormClosingEventArgs e)
+		/// <summary>
+		/// Instead of destroying the form, we just hide it so we can reuse it later.
+		/// </summary>
+		private void FormSettings_FormClosing(
+			object sender,
+			FormClosingEventArgs e)
 		{
 			Hide();
 			e.Cancel = true;
+		}
+
+		/// <summary>
+		/// Opens the log file for the user to view.
+		/// </summary>
+		private void c_showLogFile_Click(
+			object sender,
+			EventArgs e)
+		{
+			Process.Start(Log.LogPath);
 		}
 	}
 }

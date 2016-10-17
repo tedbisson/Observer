@@ -63,6 +63,9 @@ namespace Observer
 			m_timer.Tick += new EventHandler(OnTimer);
 			m_timer.Interval = RootRegistryKey.GetIntValue("Debug_MinuteLength", 60 * 1000);
 			m_timer.Start();
+
+			// Log that the program has started.
+			Log.Write(String.Format("Observer started with {0} of {1} minutes.", m_minutesRemaining, m_dailyLimit));
 		}
 
 		/// <summary>
@@ -122,6 +125,9 @@ namespace Observer
 		{
 			// Store the time remaining for today.
 			RootRegistryKey.SetIntValue("TimeLeftToday", m_minutesRemaining);
+
+			// Note in the log the program close.
+			Log.Write(String.Format("Observer closing with {0} of {1} minutes.", m_minutesRemaining, m_dailyLimit));
 		}
 
 		/// <summary>
