@@ -74,5 +74,16 @@ namespace Observer
 				Visible = false;
 			}
 		}
+
+		/// <summary>
+		/// Pause the time, this way the user doesn't have to shut off their computer.
+		/// </summary>
+		private void c_pause_Click(object sender, EventArgs e)
+		{
+			FormPause dlg = new FormPause();
+			Settings.Paused = true;
+			dlg.ShowDialog();
+			Settings.Paused = false;
+		}
 	}
 }

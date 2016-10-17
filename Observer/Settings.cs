@@ -16,6 +16,7 @@ namespace Observer
 		private static int m_minutesRemaining;
 		private static int m_dailyLimit;
 		private static int m_warningTime;
+		private static bool m_paused;
 
 		// Admin password used to change time allocation.
 		private static UInt32 m_adminPasswordHash = (UInt32) "".ComputeHash();
@@ -36,6 +37,7 @@ namespace Observer
 			m_minutesRemaining = m_dailyLimit;
 			m_warningTime = 10;
 			m_shutdown = false;
+			m_paused = false;
 
 			// Load settings from the registry.
 			LoadRegistryValues();
@@ -195,6 +197,17 @@ namespace Observer
 		}
 
 		/// <summary>
+		/// Paused property, used to indicate the user wishes to pause their activity,
+		/// for whatever reason, and not use their computer.  This way they won't have
+		/// to shut down the computer when they walk away.
+		/// </summary>
+		public static bool Paused
+		{
+			get { return m_paused; }
+			set { m_paused = value; }
+		}
+
+		/// <summary>
 		/// Timer callback, this tracks how much time the user is allowed.  At an appropriate
 		/// interval a warning is issued indicating the program will turn off the computer soon.
 		/// And when the time is consumed, it triggers a shutdown ending the users time.
@@ -203,20 +216,23 @@ namespace Observer
 			object sender,
 			EventArgs e)
 		{
-			--m_minutesRemaining;
-			if (m_minutesRemaining == m_warningTime)
+			if (m_paused == false)
 			{
-				// Offer a warning.
-				string warning = String.Format("Time is almost up, you have {0} minutes remaining!  Save your work!", m_minutesRemaining);
-				MessageBox.Show(warning, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-			}
-			else if (m_minutesRemaining <= 0)
-			{
-				// That's all folks, shutdown.
-				Settings.ShuttingDown = true;
-				ShutdownComputer();
-				//MessageBox.Show("This is when we would shut down.");
-				//Application.Exit();
+				--m_minutesRemaining;
+				if (m_minutesRemaining == m_warningTime)
+				{
+					// Offer a warning.
+					string warning = String.Format("Time is almost up, you have {0} minutes remaining!  Save your work!", m_minutesRemaining);
+					MessageBox.Show(warning, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+				}
+				else if (m_minutesRemaining <= 0)
+				{
+					// That's all folks, shutdown.
+					Settings.ShuttingDown = true;
+					ShutdownComputer();
+					//MessageBox.Show("This is when we would shut down.");
+					//Application.Exit();
+				}
 			}
 		}
 

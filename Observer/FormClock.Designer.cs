@@ -30,6 +30,7 @@
 		{
 			this.c_time = new System.Windows.Forms.Label();
 			this.c_request = new System.Windows.Forms.Button();
+			this.c_pause = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// c_time
@@ -39,7 +40,7 @@
 			this.c_time.Location = new System.Drawing.Point(0, 0);
 			this.c_time.Name = "c_time";
 			this.c_time.Size = new System.Drawing.Size(244, 121);
-			this.c_time.TabIndex = 0;
+			this.c_time.TabIndex = 2;
 			this.c_time.Text = "4:58";
 			this.c_time.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
@@ -47,19 +48,30 @@
 			// 
 			this.c_request.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.c_request.Location = new System.Drawing.Point(12, 85);
+			this.c_request.Location = new System.Drawing.Point(126, 86);
 			this.c_request.Name = "c_request";
-			this.c_request.Size = new System.Drawing.Size(220, 23);
+			this.c_request.Size = new System.Drawing.Size(106, 23);
 			this.c_request.TabIndex = 1;
-			this.c_request.Text = "Request More Time Now";
+			this.c_request.Text = "Request More Time";
 			this.c_request.UseVisualStyleBackColor = true;
 			this.c_request.Click += new System.EventHandler(this.c_request_Click);
+			// 
+			// c_pause
+			// 
+			this.c_pause.Location = new System.Drawing.Point(12, 86);
+			this.c_pause.Name = "c_pause";
+			this.c_pause.Size = new System.Drawing.Size(106, 23);
+			this.c_pause.TabIndex = 0;
+			this.c_pause.Text = "Pause";
+			this.c_pause.UseVisualStyleBackColor = true;
+			this.c_pause.Click += new System.EventHandler(this.c_pause_Click);
 			// 
 			// FormClock
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(244, 121);
+			this.Controls.Add(this.c_pause);
 			this.Controls.Add(this.c_request);
 			this.Controls.Add(this.c_time);
 			this.MaximizeBox = false;
@@ -79,5 +91,6 @@
 
 		private System.Windows.Forms.Label c_time;
 		private System.Windows.Forms.Button c_request;
+		private System.Windows.Forms.Button c_pause;
 	}
 }
