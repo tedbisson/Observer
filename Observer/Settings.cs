@@ -42,6 +42,12 @@ namespace Observer
 			// Load settings from the registry.
 			LoadRegistryValues();
 
+			// Debug helper, reset the remaining time on startup.
+			if (RootRegistryKey.GetIntValue("Debug_ForceTimeResetOnStart", 0) == 1)
+			{
+				m_minutesRemaining = m_dailyLimit;
+			}
+
 			// If we've run out of time already, notify the user.
 			if (m_minutesRemaining < 2)
 			{
@@ -55,7 +61,7 @@ namespace Observer
             // Setup the timer to update the time remaining.
 			m_timer = new Timer();
 			m_timer.Tick += new EventHandler(OnTimer);
-			m_timer.Interval = 60 * 1000;
+			m_timer.Interval = RootRegistryKey.GetIntValue("Debug_MinuteLength", 60 * 1000);
 			m_timer.Start();
 		}
 
@@ -230,8 +236,6 @@ namespace Observer
 					// That's all folks, shutdown.
 					Settings.ShuttingDown = true;
 					ShutdownComputer();
-					//MessageBox.Show("This is when we would shut down.");
-					//Application.Exit();
 				}
 			}
 		}
@@ -241,7 +245,17 @@ namespace Observer
 		/// </summary>
 		public static void ShutdownComputer()
 		{
-			Process.Start("shutdown.exe", "/s /f /t 00");
+			// For debugging, we don't actually want to shut down the computer.
+			if (RootRegistryKey.GetIntValue("Debug_DontShutDown", 0) == 1)
+			{
+				MessageBox.Show("This is when we would shut down.");
+				Application.Exit();
+			}
+			else
+			{
+				// Actually shut down.
+				Process.Start("shutdown.exe", "/s /f /t 00");
+			}
 		}
 	}
 }
