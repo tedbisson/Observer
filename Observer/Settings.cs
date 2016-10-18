@@ -216,7 +216,14 @@ namespace Observer
 		public static bool Paused
 		{
 			get { return m_paused; }
-			set { m_paused = value; }
+			set
+			{
+				m_paused = value;
+				if (m_paused == true)
+					Log.Write("Timer paused.");
+				else
+					Log.Write("Timer resumed.");
+			}
 		}
 
 		/// <summary>

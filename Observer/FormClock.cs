@@ -80,10 +80,22 @@ namespace Observer
 		/// </summary>
 		private void c_pause_Click(object sender, EventArgs e)
 		{
+			// Record how long the tool is paused.
+			DateTime start = DateTime.Now;
+			
+			// Show the pause dialog.
 			FormPause dlg = new FormPause();
 			Settings.Paused = true;
 			dlg.ShowDialog();
 			Settings.Paused = false;
+
+			// Calculate and log the pause duration.
+			int seconds = (int) ((DateTime.Now - start).TotalSeconds);
+			int minutes = seconds / 60;
+			int hours   = seconds / (60 * 60);
+			minutes = minutes % 60;
+			seconds = seconds % 60;
+			Log.Write(String.Format("Timer paused for {0}:{1:D2}:{2:D2}.", hours, minutes, seconds));
 		}
 	}
 }
