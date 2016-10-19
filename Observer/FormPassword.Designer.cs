@@ -38,7 +38,7 @@
 			// c_ok
 			// 
 			this.c_ok.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.c_ok.Location = new System.Drawing.Point(52, 68);
+			this.c_ok.Location = new System.Drawing.Point(52, 71);
 			this.c_ok.Name = "c_ok";
 			this.c_ok.Size = new System.Drawing.Size(75, 23);
 			this.c_ok.TabIndex = 1;
@@ -49,7 +49,7 @@
 			// c_cancel
 			// 
 			this.c_cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.c_cancel.Location = new System.Drawing.Point(135, 68);
+			this.c_cancel.Location = new System.Drawing.Point(135, 71);
 			this.c_cancel.Name = "c_cancel";
 			this.c_cancel.Size = new System.Drawing.Size(75, 23);
 			this.c_cancel.TabIndex = 2;
