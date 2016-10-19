@@ -45,8 +45,6 @@ namespace Observer
 		{
 			// Clean up the tray icon now!
 			m_notifyIcon.Dispose();
-			m_clockDlg.Close();
-			m_settingsDlg.Close();
 		}
 
 		/// <summary>
