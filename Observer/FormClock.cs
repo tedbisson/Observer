@@ -95,7 +95,7 @@ namespace Observer
 			int hours   = seconds / (60 * 60);
 			minutes = minutes % 60;
 			seconds = seconds % 60;
-			Log.Write(String.Format("Timer paused for {0}:{1:D2}:{2:D2}.", hours, minutes, seconds));
+			Log.Write(String.Format("Paused for {0}:{1:D2}:{2:D2}.", hours, minutes, seconds));
 		}
 	}
 }

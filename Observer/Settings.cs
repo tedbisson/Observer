@@ -55,9 +55,6 @@ namespace Observer
 				m_minutesRemaining = 2;
 			}
 
-			// Catch when the application exits to update the registry.
-			Application.ApplicationExit += new EventHandler(OnAppExit);
-
             // Setup the timer to update the time remaining.
 			m_timer = new Timer();
 			m_timer.Tick += new EventHandler(OnTimer);
@@ -113,18 +110,6 @@ namespace Observer
 		private static int DateToday()
 		{
 			return ((DateTime.Now.Year << 16) + (DateTime.Now.Month << 8) + (DateTime.Now.Day));
-		}
-
-		/// <summary>
-		/// When the application exits we want to record how much time is remaining
-		/// so the next time it is started it can resume for the day.
-		/// </summary>
-		private static void OnAppExit(
-			object sender,
-			EventArgs e)
-		{
-			// Note in the log the program close.
-			Log.Write(String.Format("Observer closing with {0} of {1} minutes.", m_minutesRemaining, m_dailyLimit));
 		}
 
 		/// <summary>
