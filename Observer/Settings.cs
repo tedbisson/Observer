@@ -123,9 +123,6 @@ namespace Observer
 			object sender,
 			EventArgs e)
 		{
-			// Store the time remaining for today.
-			RootRegistryKey.SetIntValue("TimeLeftToday", m_minutesRemaining);
-
 			// Note in the log the program close.
 			Log.Write(String.Format("Observer closing with {0} of {1} minutes.", m_minutesRemaining, m_dailyLimit));
 		}
@@ -238,6 +235,7 @@ namespace Observer
 			if (m_paused == false)
 			{
 				--m_minutesRemaining;
+				RootRegistryKey.SetIntValue("TimeLeftToday", m_minutesRemaining);
 				if (m_minutesRemaining == m_warningTime)
 				{
 					// Offer a warning.
