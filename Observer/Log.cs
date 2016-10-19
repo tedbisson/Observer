@@ -35,7 +35,7 @@ namespace Observer
 		{
 			using (StreamWriter log = File.AppendText(LogPath))
 			{
-				log.WriteLine(DateTime.Now.ToString("yyyyMMdd-HHmmss") + " - " + text);
+				log.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " - " + text);
 			}
 		}
 	}

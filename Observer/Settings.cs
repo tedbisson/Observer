@@ -201,10 +201,6 @@ namespace Observer
 			set
 			{
 				m_paused = value;
-				if (m_paused == true)
-					Log.Write("Timer paused.");
-				else
-					Log.Write("Timer resumed.");
 			}
 		}
 
