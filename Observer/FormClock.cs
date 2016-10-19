@@ -58,6 +58,8 @@ namespace Observer
 		{
 			// Format the minutes remaining as hours and minutes.
 			int time = Settings.MinutesRemaining;
+			if (time < 0)
+				time = 0;
 			c_time.Text = String.Format("{0}:{1:0#}", (time / 60), (time % 60));
 		}
 

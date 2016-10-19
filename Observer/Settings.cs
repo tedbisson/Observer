@@ -226,6 +226,7 @@ namespace Observer
 				else if (m_minutesRemaining <= 0)
 				{
 					// That's all folks, shutdown.
+					m_minutesRemaining = 0;
 					Settings.ShuttingDown = true;
 					ShutdownComputer();
 				}
