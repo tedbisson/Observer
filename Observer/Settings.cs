@@ -45,14 +45,14 @@ namespace Observer
 			// Debug helper, reset the remaining time on startup.
 			if (RootRegistryKey.GetIntValue("Debug_ForceTimeResetOnStart", 0) == 1)
 			{
-				m_minutesRemaining = m_dailyLimit;
+				MinutesRemaining = m_dailyLimit;
 			}
 
 			// If we've run out of time already, notify the user.
-			if (m_minutesRemaining < 2)
+			if (MinutesRemaining < 2)
 			{
 				MessageBox.Show("You have used up your time for today, the computer will shut down in 2 minutes!", "Time's Up", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-				m_minutesRemaining = 2;
+				MinutesRemaining = 2;
 			}
 
             // Setup the timer to update the time remaining.
@@ -62,7 +62,7 @@ namespace Observer
 			m_timer.Start();
 
 			// Log that the program has started.
-			Log.Write(String.Format("Observer started with {0} of {1} minutes.", m_minutesRemaining, m_dailyLimit));
+			Log.Write(String.Format("Observer started with {0} of {1} minutes.", MinutesRemaining, m_dailyLimit));
 		}
 
 		/// <summary>
@@ -87,17 +87,16 @@ namespace Observer
 			// Are we continuing from earlier today?
 			if (RootRegistryKey.GetIntValue("LastDay", DateToday()) == DateToday())
 			{
-				m_minutesRemaining = RootRegistryKey.GetIntValue("TimeLeftToday", m_dailyLimit);
+				MinutesRemaining = RootRegistryKey.GetIntValue("TimeLeftToday", m_dailyLimit);
 			}
 			// New day, new limit.
 			else
 			{
-				m_minutesRemaining = m_dailyLimit;
+				MinutesRemaining = m_dailyLimit;
 			}
 
 			// Update the registry from here.
 			RootRegistryKey.SetValue("LastDay", DateToday());
-			RootRegistryKey.SetValue("TimeLeftToday", m_minutesRemaining);
 
 			// Load the admin password hash.
 			int defaultHash = (int) ("".ComputeHash());
@@ -122,8 +121,7 @@ namespace Observer
 			set
 			{
 				m_minutesRemaining = value;
-
-				// Need to update the log file.
+				RootRegistryKey.SetIntValue("TimeLeftToday", m_minutesRemaining);
 			}
 		}
 
@@ -144,7 +142,7 @@ namespace Observer
 					if (minutesRemaining < m_warningTime)
 					{
 						// To avoid shutting down immediately.
-						m_minutesRemaining = m_warningTime + 1;
+						minutesRemaining = Math.Max(m_warningTime, 1);
 					}
 					MinutesRemaining = minutesRemaining;
 
@@ -215,18 +213,17 @@ namespace Observer
 		{
 			if (m_paused == false)
 			{
-				--m_minutesRemaining;
-				RootRegistryKey.SetIntValue("TimeLeftToday", m_minutesRemaining);
-				if (m_minutesRemaining == m_warningTime)
+				MinutesRemaining = MinutesRemaining - 1;
+				if (MinutesRemaining == m_warningTime)
 				{
 					// Offer a warning.
-					string warning = String.Format("Time is almost up, you have {0} minutes remaining!  Save your work!", m_minutesRemaining);
+					string warning = String.Format("Time is almost up, you have {0} minutes remaining!  Save your work!", MinutesRemaining);
 					MessageBox.Show(warning, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 				}
-				else if (m_minutesRemaining <= 0)
+				else if (MinutesRemaining <= 0)
 				{
 					// That's all folks, shutdown.
-					m_minutesRemaining = 0;
+					MinutesRemaining = 0;
 					Settings.ShuttingDown = true;
 					ShutdownComputer();
 				}
