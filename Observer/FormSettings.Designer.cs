@@ -117,9 +117,7 @@
 			this.Name = "FormSettings";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Observer Settings";
-			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSettings_FormClosing);
 			this.Load += new System.EventHandler(this.FormSettings_Load);
-			this.Shown += new System.EventHandler(this.FormSettings_Shown);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

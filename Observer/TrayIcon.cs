@@ -11,7 +11,7 @@ namespace Observer
 	{
 		private NotifyIcon   m_notifyIcon;
 		private FormClock    m_clockDlg;
-		private FormSettings m_settingsDlg;
+		private bool         m_settingsVisible = false;
 
 		/// <summary>
 		/// Accessor for components to get back to this main program controller,
@@ -35,7 +35,6 @@ namespace Observer
 			// Setup components.
 			m_notifyIcon  = new NotifyIcon();
 			m_clockDlg    = new FormClock();
-			m_settingsDlg = new FormSettings();
 		}
 
 		/// <summary>
@@ -119,17 +118,18 @@ namespace Observer
 		/// </summary>
 		public void ShowSettingsDlg()
 		{
-			// If it's visible, we're done.
-			if (m_settingsDlg.Visible == true)
-				return;
+			if (m_settingsVisible == false)
+			{
+				m_settingsVisible = true;
+				FormPassword passwordDlg = new FormPassword();
+				if (passwordDlg.ShowDialog() == DialogResult.OK)
+				{
+					FormSettings settingsDlg = new FormSettings();
+					settingsDlg.ShowDialog();
+				}
 
-			// Admin password required.
-			FormPassword password = new FormPassword();
-			if (password.ShowDialog() != DialogResult.OK)
-				return;
-
-			// Show the settings dialog.
-			m_settingsDlg.Show();
+				m_settingsVisible = false;
+			}
 		}
 		
 		/// <summary>

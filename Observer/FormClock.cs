@@ -24,7 +24,12 @@ namespace Observer
 			object sender,
 			EventArgs e)
 		{
-			TrayIcon.Instance.ShowSettingsDlg();
+			FormPassword passwordDlg = new FormPassword();
+			if (passwordDlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			{
+				FormAddTime addTimeDlg = new FormAddTime();
+				addTimeDlg.ShowDialog();
+			}
 		}
 
 		/// <summary>

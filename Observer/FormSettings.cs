@@ -46,8 +46,8 @@ namespace Observer
 				Settings.MinutesRemaining = timeRemaining;
 			}
 
-			// Hide the settings.
-			Hide();
+			// Done with the dialog.
+			Close();
 		}
 
 		/// <summary>
@@ -58,27 +58,7 @@ namespace Observer
 			EventArgs e)
 		{
 			c_timeLimit.Text = Settings.DailyLimit.ToString();
-		}
-
-		/// <summary>
-		/// When the form is shown it updates the time remaining text box.
-		/// </summary>
-		private void FormSettings_Shown(
-			object sender,
-			EventArgs e)
-		{
 			c_timeRemaining.Text = Settings.MinutesRemaining.ToString();
-		}
-
-		/// <summary>
-		/// Instead of destroying the form, we just hide it so we can reuse it later.
-		/// </summary>
-		private void FormSettings_FormClosing(
-			object sender,
-			FormClosingEventArgs e)
-		{
-			Hide();
-			e.Cancel = true;
 		}
 
 		/// <summary>

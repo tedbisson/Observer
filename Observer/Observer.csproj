@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormAddTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddTime.Designer.cs">
+      <DependentUpon>FormAddTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormChangePassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +90,9 @@
     <Compile Include="Settings.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="TrayIcon.cs" />
+    <EmbeddedResource Include="FormAddTime.resx">
+      <DependentUpon>FormAddTime.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormChangePassword.resx">
       <DependentUpon>FormChangePassword.cs</DependentUpon>
     </EmbeddedResource>
