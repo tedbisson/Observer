@@ -37,7 +37,7 @@ namespace Observer
 			}
 
 			// Verify the current password before changing it.
-			UInt32 oldPassword = c_oldPassword.Text.ComputeHash();
+			int oldPassword = c_oldPassword.Text.ComputeHash();
 			if (oldPassword != Settings.AdminPasswordHash)
 			{
 				c_currentLabel.ForeColor = Color.Red;
@@ -48,7 +48,7 @@ namespace Observer
 			}
 
 			// Set the new password.
-			Settings.SetAdminPassword(c_newPassword.Text);
+			Settings.AdminPasswordHash = c_newPassword.Text.ComputeHash();
 			MessageBox.Show("Password changed!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Close();
 		}

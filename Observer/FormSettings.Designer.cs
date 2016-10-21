@@ -35,6 +35,8 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.c_timeRemaining = new System.Windows.Forms.TextBox();
 			this.c_showLogFile = new System.Windows.Forms.Button();
+			this.c_bedTime = new System.Windows.Forms.DateTimePicker();
+			this.label2 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// label3
@@ -55,20 +57,22 @@
 			// 
 			// c_save
 			// 
-			this.c_save.Location = new System.Drawing.Point(193, 106);
+			this.c_save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.c_save.Location = new System.Drawing.Point(193, 131);
 			this.c_save.Name = "c_save";
 			this.c_save.Size = new System.Drawing.Size(75, 23);
-			this.c_save.TabIndex = 4;
+			this.c_save.TabIndex = 6;
 			this.c_save.Text = "Save";
 			this.c_save.UseVisualStyleBackColor = true;
 			this.c_save.Click += new System.EventHandler(this.c_save_Click);
 			// 
 			// c_changePassword
 			// 
-			this.c_changePassword.Location = new System.Drawing.Point(15, 76);
+			this.c_changePassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.c_changePassword.Location = new System.Drawing.Point(15, 101);
 			this.c_changePassword.Name = "c_changePassword";
 			this.c_changePassword.Size = new System.Drawing.Size(147, 23);
-			this.c_changePassword.TabIndex = 2;
+			this.c_changePassword.TabIndex = 4;
 			this.c_changePassword.Text = "Change Admin Password";
 			this.c_changePassword.UseVisualStyleBackColor = true;
 			this.c_changePassword.Click += new System.EventHandler(this.c_changePassword_Click);
@@ -76,7 +80,7 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(12, 41);
+			this.label1.Location = new System.Drawing.Point(22, 41);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(119, 13);
 			this.label1.TabIndex = 4;
@@ -91,24 +95,47 @@
 			// 
 			// c_showLogFile
 			// 
-			this.c_showLogFile.Location = new System.Drawing.Point(15, 106);
+			this.c_showLogFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.c_showLogFile.Location = new System.Drawing.Point(15, 131);
 			this.c_showLogFile.Name = "c_showLogFile";
 			this.c_showLogFile.Size = new System.Drawing.Size(147, 23);
-			this.c_showLogFile.TabIndex = 3;
+			this.c_showLogFile.TabIndex = 5;
 			this.c_showLogFile.Text = "Show Log File";
 			this.c_showLogFile.UseVisualStyleBackColor = true;
 			this.c_showLogFile.Click += new System.EventHandler(this.c_showLogFile_Click);
+			// 
+			// c_bedTime
+			// 
+			this.c_bedTime.Checked = false;
+			this.c_bedTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+			this.c_bedTime.Location = new System.Drawing.Point(146, 64);
+			this.c_bedTime.Name = "c_bedTime";
+			this.c_bedTime.ShowCheckBox = true;
+			this.c_bedTime.ShowUpDown = true;
+			this.c_bedTime.Size = new System.Drawing.Size(122, 20);
+			this.c_bedTime.TabIndex = 3;
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(32, 67);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(108, 13);
+			this.label2.TabIndex = 4;
+			this.label2.Text = "Use a bedtime cutoff:";
 			// 
 			// FormSettings
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(288, 146);
+			this.ClientSize = new System.Drawing.Size(288, 171);
 			this.ControlBox = false;
+			this.Controls.Add(this.c_bedTime);
 			this.Controls.Add(this.c_showLogFile);
 			this.Controls.Add(this.c_changePassword);
 			this.Controls.Add(this.c_save);
 			this.Controls.Add(this.c_timeRemaining);
+			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.c_timeLimit);
 			this.Controls.Add(this.label3);
@@ -132,5 +159,7 @@
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.TextBox c_timeRemaining;
 		private System.Windows.Forms.Button c_showLogFile;
+		private System.Windows.Forms.DateTimePicker c_bedTime;
+		private System.Windows.Forms.Label label2;
 	}
 }

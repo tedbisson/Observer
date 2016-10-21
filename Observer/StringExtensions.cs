@@ -11,12 +11,12 @@ namespace Observer
 		/// Computes a hash value for the string provided.  This is a simple algorithm, but it will remain stable
 		/// across .Net versions, something not guaranteed by the API otherwise.  (Although alternatives exist.)
 		/// </summary>
-		public static UInt32 ComputeHash(this string str)
+		public static int ComputeHash(this string str)
 		{
-			UInt32 hash = 42;
+			int hash = 42;
 			foreach (char c in str)
 			{
-				hash = ((hash << 5) + hash) + (UInt32) c;
+				hash = ((hash << 5) + hash) + (int) c;
 			}
 
 			return hash;

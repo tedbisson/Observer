@@ -43,8 +43,12 @@ namespace Observer
 			int timeRemaining = 0;
 			if (int.TryParse(c_timeRemaining.Text, out timeRemaining) == true)
 			{
-				Settings.MinutesRemaining = timeRemaining;
+				Settings.TimeLeftToday = timeRemaining;
 			}
+
+			// Update the bedtime.
+			Settings.UseBedTime = c_bedTime.Checked;
+			Settings.BedTime = c_bedTime.Value;
 
 			// Done with the dialog.
 			Close();
@@ -58,7 +62,9 @@ namespace Observer
 			EventArgs e)
 		{
 			c_timeLimit.Text = Settings.DailyLimit.ToString();
-			c_timeRemaining.Text = Settings.MinutesRemaining.ToString();
+			c_timeRemaining.Text = Settings.TimeLeftToday.ToString();
+			c_bedTime.Checked = Settings.UseBedTime;
+			c_bedTime.Value = Settings.BedTime;
 		}
 
 		/// <summary>

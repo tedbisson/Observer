@@ -18,7 +18,7 @@ namespace Observer
 		/// </summary>
 		private void FormAddTime_Load(object sender, EventArgs e)
 		{
-			c_time.Text = Settings.MinutesRemaining.ToString();
+			c_time.Text = Settings.TimeLeftToday.ToString();
 			c_time.SelectionStart = 0;
 			c_time.SelectionLength = c_time.Text.Length;
 		}
@@ -40,7 +40,7 @@ namespace Observer
 				return;
 			}
 		
-			Settings.MinutesRemaining = time;
+			Settings.TimeLeftToday = time;
 			DialogResult = System.Windows.Forms.DialogResult.OK;
 			Close();
 		}

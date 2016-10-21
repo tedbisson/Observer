@@ -12,47 +12,47 @@ namespace Observer
 	/// </summary>
 	public static class Settings
 	{
-		// Time remaining before shutdown, measured in minutes.
-		private static int m_minutesRemaining;
-		private static int m_dailyLimit;
-		private static int m_warningTime;
-		private static bool m_paused;
-
-		// Admin password used to change time allocation.
-		private static UInt32 m_adminPasswordHash = (UInt32) "".ComputeHash();
-
 		// Timer used to update remaining time.
 		private static System.Windows.Forms.Timer m_timer;
 
-		// Flag indicating that the program is shutting down.
-		private static bool m_shutdown;
+		// Program flags to signal current states.
+		private static bool m_shutdown = false;
+		public  static bool Paused = false;
 
 		/// <summary>
 		/// Initializes the settings data, must be called once at program start.
 		/// </summary>
 		public static void Initialize()
 		{
-			// Set default values.
-			m_dailyLimit = 30;
-			m_minutesRemaining = m_dailyLimit;
-			m_warningTime = 10;
-			m_shutdown = false;
-			m_paused = false;
+			// New day? Reset the limit!
+			if (RootRegistryKey.GetIntValue("LastDay", (DateTime.Now.DateOnly() - 1)) != DateTime.Now.DateOnly())
+			{
+				TimeLeftToday = DailyLimit;
+			}
+			RootRegistryKey.SetValue("LastDay", DateTime.Now.DateOnly());
 
-			// Load settings from the registry.
-			LoadRegistryValues();
+			// Bedtime check!
+			if (UseBedTime == true)
+			{
+				int minutesToBedTime = (int) (BedTime - DateTime.Now).TotalMinutes;
+				if (minutesToBedTime < TimeLeftToday)
+				{
+					TimeLeftToday = minutesToBedTime;
+					MessageBox.Show("Bedtime approaches, you will run out of time soon!", "Bedtime!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				}
+			}
 
 			// Debug helper, reset the remaining time on startup.
 			if (RootRegistryKey.GetIntValue("Debug_ForceTimeResetOnStart", 0) == 1)
 			{
-				MinutesRemaining = m_dailyLimit;
+				TimeLeftToday = DailyLimit;
 			}
 
 			// If we've run out of time already, notify the user.
-			if (MinutesRemaining < 2)
+			if (TimeLeftToday < 2)
 			{
 				MessageBox.Show("You have used up your time for today, the computer will shut down in 2 minutes!", "Time's Up", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-				MinutesRemaining = 2;
+				TimeLeftToday = 2;
 			}
 
             // Setup the timer to update the time remaining.
@@ -62,7 +62,7 @@ namespace Observer
 			m_timer.Start();
 
 			// Log that the program has started.
-			Log.Write(String.Format("Observer started with {0} of {1} minutes.", MinutesRemaining, m_dailyLimit));
+			Log.Write(String.Format("Observer started with {0} of {1} minutes.", TimeLeftToday, DailyLimit));
 		}
 
 		/// <summary>
@@ -77,52 +77,13 @@ namespace Observer
 		}
 
 		/// <summary>
-		/// Loads or initializes the program values using the Windows registry.
-		/// </summary>
-		private static void LoadRegistryValues()
-		{
-			// Load the daily limit.
-			m_dailyLimit = RootRegistryKey.GetIntValue("DailyLimit", 30);
-
-			// Are we continuing from earlier today?
-			if (RootRegistryKey.GetIntValue("LastDay", DateToday()) == DateToday())
-			{
-				MinutesRemaining = RootRegistryKey.GetIntValue("TimeLeftToday", m_dailyLimit);
-			}
-			// New day, new limit.
-			else
-			{
-				MinutesRemaining = m_dailyLimit;
-			}
-
-			// Update the registry from here.
-			RootRegistryKey.SetValue("LastDay", DateToday());
-
-			// Load the admin password hash.
-			int defaultHash = (int) ("".ComputeHash());
-			m_adminPasswordHash = (UInt32) RootRegistryKey.GetIntValue("AdminPassword", defaultHash);
-		}
-
-		/// <summary>
-		/// Helper to format the date used to determine the daily limit.
-		/// </summary>
-		private static int DateToday()
-		{
-			return ((DateTime.Now.Year << 16) + (DateTime.Now.Month << 8) + (DateTime.Now.Day));
-		}
-
-		/// <summary>
 		/// MinutesRemaining property, indicates how many minutes the user has before
 		/// the system will be shut down.
 		/// </summary>
-		public static int MinutesRemaining
+		public static int TimeLeftToday
 		{
-			get { return m_minutesRemaining; }
-			set
-			{
-				m_minutesRemaining = value;
-				RootRegistryKey.SetIntValue("TimeLeftToday", m_minutesRemaining);
-			}
+			get { return RootRegistryKey.GetIntValue("TimeLeftToday", DailyLimit); }
+			set { RootRegistryKey.SetIntValue("TimeLeftToday", value); }
 		}
 
 		/// <summary>
@@ -133,44 +94,78 @@ namespace Observer
 		/// </summary>
 		public static int DailyLimit
 		{
-			get { return m_dailyLimit; }
+			get { return RootRegistryKey.GetIntValue("DailyLimit", 30); }
 			set
 			{
-				if (m_dailyLimit != value)
+				if (DailyLimit != value)
 				{
-					int minutesRemaining = value - (m_dailyLimit - m_minutesRemaining);
-					if (minutesRemaining < m_warningTime)
+					int minutesRemaining = value - (DailyLimit - TimeLeftToday);
+					if (minutesRemaining < WarningTime)
 					{
 						// To avoid shutting down immediately.
-						minutesRemaining = Math.Max(m_warningTime, 1);
+						minutesRemaining = Math.Max(WarningTime, 1);
 					}
-					MinutesRemaining = minutesRemaining;
+					TimeLeftToday = minutesRemaining;
 
-					m_dailyLimit = value;
-
-					RootRegistryKey.SetValue("DailyLimit", m_dailyLimit);
+					RootRegistryKey.SetIntValue("DailyLimit", value);
 				}
 			}
+		}
+
+		/// <summary>
+		/// WarningTime property, indicates how many minutes before the time expires
+		/// to warn the user.
+		/// </summary>
+		public static int WarningTime
+		{
+			get { return RootRegistryKey.GetIntValue("WarningTime", 10); }
+			set { RootRegistryKey.SetIntValue("WarningTime", value); }
+		}
+
+		/// <summary>
+		/// Default password hash property, used as the default password.
+		/// </summary>
+		private static int m_defaultPasswordHash = "".ComputeHash();
+		public static int DefaultPasswordHash
+		{
+			get { return m_defaultPasswordHash; }
 		}
 
 		/// <summary>
 		/// AdminPasswordHash property, returns the password hash value used to restrict
 		/// access to parts of the program, or turn it off.
 		/// </summary>
-		public static UInt32 AdminPasswordHash
+		public static int AdminPasswordHash
 		{
-			get { return m_adminPasswordHash; }
+			get { return RootRegistryKey.GetIntValue("AdminPassword", DefaultPasswordHash); }
+			set { RootRegistryKey.SetIntValue("AdminPassword", value); }
 		}
 
 		/// <summary>
-		/// Updates the administrative password for the program.
+		/// UseBedTime property, indicates that the program should expire all time at
+		/// the designated bedtime.
 		/// </summary>
-		public static void SetAdminPassword(string password)
+		public static bool UseBedTime
 		{
-			m_adminPasswordHash = password.ComputeHash();
+			get { return RootRegistryKey.GetBoolValue("UseBedTime", false); }
+			set { RootRegistryKey.SetBoolValue("UseBedTime", value); }
+		}
 
-			// Save the updated password hash value.
-			RootRegistryKey.SetIntValue("AdminPassword", (int) m_adminPasswordHash);
+		/// <summary>
+		/// BedTime property, indicates what time bedtime takes place.  Bedtime is stored in the
+		/// registry in an integer value of the format 0xHHHHMMMM.
+		/// </summary>
+		public static DateTime BedTime
+		{
+			get
+			{
+				int bedTime = RootRegistryKey.GetIntValue("BedTime", (21 << 16)); // 9pm by default
+				return new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, (bedTime >> 16), (bedTime & 0x0000FFFF), 0);
+			}
+			set
+			{
+				RootRegistryKey.SetIntValue("BedTime", (value.Hour << 16) + value.Minute);
+			}
 		}
 
 		/// <summary>
@@ -189,20 +184,6 @@ namespace Observer
 		}
 
 		/// <summary>
-		/// Paused property, used to indicate the user wishes to pause their activity,
-		/// for whatever reason, and not use their computer.  This way they won't have
-		/// to shut down the computer when they walk away.
-		/// </summary>
-		public static bool Paused
-		{
-			get { return m_paused; }
-			set
-			{
-				m_paused = value;
-			}
-		}
-
-		/// <summary>
 		/// Timer callback, this tracks how much time the user is allowed.  At an appropriate
 		/// interval a warning is issued indicating the program will turn off the computer soon.
 		/// And when the time is consumed, it triggers a shutdown ending the users time.
@@ -211,19 +192,19 @@ namespace Observer
 			object sender,
 			EventArgs e)
 		{
-			if (m_paused == false)
+			if (Paused == false)
 			{
-				MinutesRemaining = MinutesRemaining - 1;
-				if (MinutesRemaining == m_warningTime)
+				TimeLeftToday = TimeLeftToday - 1;
+				if (TimeLeftToday == WarningTime)
 				{
 					// Offer a warning.
-					string warning = String.Format("Time is almost up, you have {0} minutes remaining!  Save your work!", MinutesRemaining);
+					string warning = String.Format("Time is almost up, you have {0} minutes remaining!  Save your work!", TimeLeftToday);
 					MessageBox.Show(warning, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 				}
-				else if (MinutesRemaining <= 0)
+				else if (TimeLeftToday <= 0)
 				{
 					// That's all folks, shutdown.
-					MinutesRemaining = 0;
+					TimeLeftToday = 0;
 					Settings.ShuttingDown = true;
 					ShutdownComputer();
 				}
