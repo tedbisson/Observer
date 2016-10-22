@@ -24,12 +24,14 @@ namespace Observer
 			object sender,
 			EventArgs e)
 		{
+			Settings.Paused = true;
 			FormPassword passwordDlg = new FormPassword();
 			if (passwordDlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
 				FormAddTime addTimeDlg = new FormAddTime();
 				addTimeDlg.ShowDialog();
 			}
+			Settings.Paused = false;
 		}
 
 		/// <summary>

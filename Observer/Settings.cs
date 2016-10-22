@@ -205,13 +205,13 @@ namespace Observer
 				{
 					// That's all folks, shutdown.
 					TimeLeftToday = 0;
-                    Paused = true;
-                    FormTimesUp timesUpDlg = new FormTimesUp();
-                    if (timesUpDlg.ShowDialog() == DialogResult.OK)
-                    {
-                        ShutdownComputer();
-                    }
-                    Paused = false;
+					Paused = true;
+					FormTimesUp timesUpDlg = new FormTimesUp();
+					if (timesUpDlg.ShowDialog() == DialogResult.OK)
+					{
+						ShutdownComputer();
+					}
+					Paused = false;
 				}
 			}
 		}
