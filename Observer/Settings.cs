@@ -68,7 +68,7 @@ namespace Observer
 		/// <summary>
 		/// Returns the root registry key for the program.
 		/// </summary>
-		private static RegistryKey RootRegistryKey
+		public static RegistryKey RootRegistryKey
 		{
 			get
 			{
