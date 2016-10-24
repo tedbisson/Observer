@@ -18,23 +18,6 @@ namespace Observer
 		}
 
 		/// <summary>
-		/// User requests additional time.
-		/// </summary>
-		private void c_request_Click(
-			object sender,
-			EventArgs e)
-		{
-			Settings.Paused = true;
-			FormPassword passwordDlg = new FormPassword();
-			if (passwordDlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-			{
-				FormAddTime addTimeDlg = new FormAddTime();
-				addTimeDlg.ShowDialog();
-			}
-			Settings.Paused = false;
-		}
-
-		/// <summary>
 		/// On load, initializes the dialog and positions it in the bottom corner of the screen.
 		/// </summary>
 		private void FormClock_Load(
@@ -91,7 +74,7 @@ namespace Observer
 		{
 			// Record how long the tool is paused.
 			DateTime start = DateTime.Now;
-			
+
 			// Show the pause dialog.
 			FormPause dlg = new FormPause();
 			Settings.Paused = true;
@@ -105,6 +88,33 @@ namespace Observer
 			minutes = minutes % 60;
 			seconds = seconds % 60;
 			Log.Write(String.Format("Paused for {0}:{1:D2}:{2:D2}.", hours, minutes, seconds));
+		}
+
+		/// <summary>
+		/// User requests additional time.
+		/// </summary>
+		private void c_addTime_Click(
+			object sender,
+			EventArgs e)
+		{
+			Settings.Paused = true;
+			FormPassword passwordDlg = new FormPassword();
+			if (passwordDlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			{
+				FormAddTime addTimeDlg = new FormAddTime();
+				addTimeDlg.ShowDialog();
+			}
+			Settings.Paused = false;
+		}
+
+		/// <summary>
+		/// User requests close the clock.
+		/// </summary>
+		private void c_close_Click(
+			object sender,
+			EventArgs e)
+		{
+			Hide();
 		}
 	}
 }

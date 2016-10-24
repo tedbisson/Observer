@@ -63,9 +63,39 @@ namespace Observer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ClockAdd {
+            get {
+                object obj = ResourceManager.GetObject("ClockAdd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ClockClose {
+            get {
+                object obj = ResourceManager.GetObject("ClockClose", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ClockImage {
             get {
                 object obj = ResourceManager.GetObject("ClockImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ClockPause {
+            get {
+                object obj = ResourceManager.GetObject("ClockPause", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -86,6 +116,16 @@ namespace Observer.Properties {
         internal static System.Drawing.Bitmap ObserverImage {
             get {
                 object obj = ResourceManager.GetObject("ObserverImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PauseImage {
+            get {
+                object obj = ResourceManager.GetObject("PauseImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

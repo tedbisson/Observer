@@ -156,6 +156,10 @@
   <ItemGroup>
     <None Include="Resources\ProgramIcon.png" />
     <Content Include="ProgramIcon.ico" />
+    <None Include="Resources\PauseImage.png" />
+    <None Include="Resources\ClockAdd.png" />
+    <None Include="Resources\ClockPause.png" />
+    <None Include="Resources\ClockClose.png" />
     <Content Include="Version.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
