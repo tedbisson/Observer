@@ -49,10 +49,13 @@ namespace Observer
 			}
 
 			// If we've run out of time already, notify the user.
-			if (TimeLeftToday < 2)
+			if (TimeLeftToday <= 0)
 			{
-				MessageBox.Show("You have used up your time for today, the computer will shut down in 2 minutes!", "Time's Up", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-				TimeLeftToday = 2;
+				FormTimesUp timesUpDlg = new FormTimesUp();
+				if (timesUpDlg.ShowDialog() == DialogResult.OK)
+				{
+					ShutdownComputer();
+				}
 			}
 
             // Setup the timer to update the time remaining.
