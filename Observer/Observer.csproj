@@ -84,6 +84,12 @@
     <Compile Include="FormSettings.Designer.cs">
       <DependentUpon>FormSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormWarning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormWarning.Designer.cs">
+      <DependentUpon>FormWarning.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormTimesUp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormSettings.resx">
       <DependentUpon>FormSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormWarning.resx">
+      <DependentUpon>FormWarning.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormTimesUp.resx">
       <DependentUpon>FormTimesUp.cs</DependentUpon>

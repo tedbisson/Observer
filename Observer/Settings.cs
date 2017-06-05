@@ -201,8 +201,10 @@ namespace Observer
 				if (TimeLeftToday == WarningTime)
 				{
 					// Offer a warning.
-					string warning = String.Format("Time is almost up, you have {0} minutes remaining!  Save your work!", TimeLeftToday);
-					MessageBox.Show(warning, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+					Paused = true;
+					FormWarning warningDlg = new FormWarning();
+					warningDlg.ShowDialog();
+					Paused = false;
 				}
 				else if (TimeLeftToday <= 0)
 				{
