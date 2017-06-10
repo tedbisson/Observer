@@ -4,12 +4,12 @@ using System.Windows.Forms;
 
 namespace Observer
 {
-    public partial class FormWarning : Form
+    public partial class FormBedtime : Form
     {
 		/// <summary>
 		/// Constructor.
 		/// </summary>
-		public FormWarning()
+		public FormBedtime()
         {
             InitializeComponent();
         }
@@ -17,7 +17,7 @@ namespace Observer
 		/// <summary>
 		/// Updates the text location when the form size changes.
 		/// </summary>
-        private void FormWarning_SizeChanged(
+        private void FormBedtime_SizeChanged(
 			object sender,
 			EventArgs e)
         {

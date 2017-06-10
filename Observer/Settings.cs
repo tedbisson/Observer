@@ -38,7 +38,10 @@ namespace Observer
 				if (minutesToBedTime < TimeLeftToday)
 				{
 					TimeLeftToday = minutesToBedTime;
-					MessageBox.Show("Bedtime approaches, you will run out of time soon!", "Bedtime!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					Paused = true;
+					FormBedtime bedtTimeDlg = new FormBedtime();
+					bedtTimeDlg.ShowDialog();
+					Paused = false;
 				}
 			}
 
